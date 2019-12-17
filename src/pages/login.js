@@ -11,6 +11,9 @@ import Button from "@material-ui/core/Button";
 import axios from "axios";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
+// const styles = theme => ({
+//   ...theme.spreadIt
+// });
 const styles = {
   form: {
     textAlign: "center"
@@ -57,6 +60,7 @@ class login extends Component {
       .post("/login", userData)
       .then(res => {
         console.log(res.data);
+        localStorage.setItem("FBIdToken", `Bearer ${res.data.token}`);
         this.setState({ loading: false });
         this.props.history.push("/");
       })
@@ -108,6 +112,7 @@ class login extends Component {
               onChange={this.handleChange}
               fullWidth
             />
+
             {errors.general && (
               <Typography variant="body2" className={classes.customError}>
                 {errors.general}

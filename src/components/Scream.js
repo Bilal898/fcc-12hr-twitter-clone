@@ -11,7 +11,15 @@ import ChatIcon from "@material-ui/icons/Chat";
 
 const styles = {
   card: {
-    display: "flex"
+    display: "flex",
+    marginBottom: 20
+  },
+  image: {
+    minWidth: 200
+  },
+  content: {
+    padding: 25,
+    objectFit: "cover"
   }
 };
 class Scream extends Component {
@@ -29,9 +37,13 @@ class Scream extends Component {
       }
     } = this.props;
     return (
-      <Card>
-        <CardMedia image={userImage} title="profile image" />
-        <CardContent>
+      <Card className={classes.card}>
+        <CardMedia
+          image={userImage}
+          title="profile image"
+          className={classes.image}
+        />
+        <CardContent className={classes.content}>
           <Typography
             variant="h5"
             component={Link}

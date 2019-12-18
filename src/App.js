@@ -3,6 +3,9 @@ import "./App.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import themeFile from "./util/theme";
 import jwtDecode from "jwt-decode";
+import { Provider } from "react-redux";
+import store from "./redux/store";
+
 //components
 import Navbar from "./components/Navbar";
 import AuthRoute from "./util/AuthRoute";
@@ -30,28 +33,30 @@ if (token) {
 export default class App extends Component {
   render() {
     return (
-      <ThemeProvider theme={theme}>
-        <Router>
-          <Navbar />
-          <div className="container">
-            <Switch>
-              <Route exact path="/" component={home} />
-              <AuthRoute
-                exact
-                path="/login"
-                component={login}
-                authenticated={authenticated}
-              />
-              <AuthRoute
-                exact
-                path="/signup"
-                component={signup}
-                authenticated={authenticated}
-              />
-            </Switch>
-          </div>
-        </Router>
-      </ThemeProvider>
+      <Provider store={store}>
+        <ThemeProvider theme={theme}>
+          <Router>
+            <Navbar />
+            <div className="container">
+              <Switch>
+                <Route exact path="/" component={home} />
+                <AuthRoute
+                  exact
+                  path="/login"
+                  component={login}
+                  authenticated={authenticated}
+                />
+                <AuthRoute
+                  exact
+                  path="/signup"
+                  component={signup}
+                  authenticated={authenticated}
+                />
+              </Switch>
+            </div>
+          </Router>
+        </ThemeProvider>
+      </Provider>
     );
   }
 }

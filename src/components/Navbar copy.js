@@ -17,23 +17,23 @@ class Navbar extends Component {
     const { authenticated } = this.props;
     return (
       <AppBar>
-        <Toolbar className="nav-container">
-          {authenticated ? (
-            <Fragment>
-              <MyButton tip="Create a scream">
-                <AddIcon />
+        {authenticated ? (
+          <Fragment>
+            <MyButton tip="Create a scream">
+              <AddIcon />
+            </MyButton>
+            <Link to="/">
+              <MyButton tip="home">
+                <HomeIcon />
               </MyButton>
-              <Link to="/">
-                <MyButton tip="home">
-                  <HomeIcon />
-                </MyButton>
-              </Link>
-              <MyButton tip="notifications">
-                <Notifications />
-              </MyButton>
-            </Fragment>
-          ) : (
-            <Fragment>
+            </Link>
+            <MyButton tip="notifications">
+              <Notifications />
+            </MyButton>
+          </Fragment>
+        ) : (
+          <Fragment>
+            <Toolbar className="nav-container">
               <Button color="inherit" component={Link} to="/login">
                 Login
               </Button>
@@ -43,9 +43,9 @@ class Navbar extends Component {
               <Button color="inherit" component={Link} to="/signup">
                 Signup
               </Button>
-            </Fragment>
-          )}
-        </Toolbar>
+            </Toolbar>
+          </Fragment>
+        )}
       </AppBar>
     );
   }

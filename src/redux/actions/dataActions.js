@@ -29,6 +29,19 @@ export const getScreams = () => dispatch => {
     });
 };
 
+export const postNewScream = newScreamData => dispatch => {
+  console.log("new scream", newScreamData);
+  axios
+    .post("/scream", newScreamData)
+    .then(res => {
+      dispatch({
+        type: POST_SCREAM,
+        payload: res.data
+      });
+    })
+    .catch(err => console.log(err));
+};
+
 export const likeScream = screamId => dispatch => {
   dispatch({ type: LOADING_DATA });
   axios

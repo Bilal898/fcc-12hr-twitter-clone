@@ -2,6 +2,7 @@ import React, { Component, Fragment } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import PostScream from "./PostScream.js";
 //mui
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -13,6 +14,9 @@ import HomeIcon from "@material-ui/icons/Home";
 import Notifications from "@material-ui/icons/Notifications";
 
 class Navbar extends Component {
+  // handlePostScream = () => {
+  //   return <PostScream onClick={this.handleOpen} />;
+  // };
   render() {
     const { authenticated } = this.props;
     return (
@@ -20,9 +24,10 @@ class Navbar extends Component {
         <Toolbar className="nav-container">
           {authenticated ? (
             <Fragment>
-              <MyButton tip="Create a scream">
-                <AddIcon />
-              </MyButton>
+              {/* <MyButton tip="Create a scream" onClick={this.handlePostScream}>
+                <AddIcon /> */}
+              <PostScream />
+              {/* </MyButton> */}
               <Link to="/">
                 <MyButton tip="home">
                   <HomeIcon />

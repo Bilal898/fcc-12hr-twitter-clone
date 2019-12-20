@@ -22,6 +22,11 @@ export default function(state = initialState, action) {
         ...state,
         loading: true
       };
+    case POST_SCREAM:
+      state.screams.push(action.payload);
+      return {
+        ...state
+      };
     case SET_SCREAMS:
       return {
         ...state,
@@ -38,10 +43,10 @@ export default function(state = initialState, action) {
         ...state
       };
     case DELETE_SCREAM:
-      index = state.screams.findIndex(
+      let index1 = state.screams.findIndex(
         scream => scream.screamId === action.payload
       );
-      state.screams.splice(index, 1);
+      state.screams.splice(index1, 1);
       return {
         ...state
       };

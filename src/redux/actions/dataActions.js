@@ -32,7 +32,7 @@ export const getScreams = () => dispatch => {
 export const likeScream = screamId => dispatch => {
   dispatch({ type: LOADING_DATA });
   axios
-    .post(`/scream/${screamId}/like`)
+    .get(`/scream/${screamId}/like`)
     .then(res => {
       dispatch({ type: LIKE_SCREAM, payload: res.data });
     })
@@ -46,6 +46,15 @@ export const unlikeScream = screamId => dispatch => {
         type: UNLIKE_SCREAM,
         payload: res.data
       });
+    })
+    .catch(err => console.log(err));
+};
+
+export const deleteScream = screamId => dispatch => {
+  axios
+    .delete(`/scream/${screamId}`)
+    .then(() => {
+      dispatch({ type: DELETE_SCREAM, payload: screamId });
     })
     .catch(err => console.log(err));
 };

@@ -14,27 +14,16 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 // Icons
 import EditIcon from "@material-ui/icons/Edit";
 import AddIcon from "@material-ui/icons/Add";
-import CloseIcon from "@material-ui/icons/Close";
 import MyButton from "../util/MyButton";
 //redux
 import { connect } from "react-redux";
 import { postScream } from "../redux/actions/dataActions";
 
 const styles = theme => ({
-  ...theme,
-  submitButton: {
-    position: "relative",
-    float: "right",
-    marginTop: 10
-  },
-  progressSpinner: {
-    position: "absolute"
-  },
-  closeButton: {
-    position: "absolute",
-    left: "91%",
-    top: "6%"
-  }
+  ...theme
+  // button: {
+  //   float: "right"
+  // }
 });
 
 class PostScream extends Component {
@@ -44,7 +33,17 @@ class PostScream extends Component {
     open: false,
     errors: {}
   };
-
+  //   componentDidMount() {
+  //     const { credentials } = this.props;
+  //     this.mapUserDetailsToState(credentials);
+  //   }
+  //   mapUserDetailsToState = credentials => {
+  //     this.setState({
+  //       bio: credentials.bio ? credentials.bio : "",
+  //       website: credentials.website ? credentials.website : "",
+  //       location: credentials.location ? credentials.location : ""
+  //     });
+  //   };
   componentWillReceiveProps(nextProps) {
     if (nextProps.UI.errors) {
       this.setState({ errors: nextProps.UI.errors });
@@ -87,7 +86,9 @@ class PostScream extends Component {
     return (
       <Fragment>
         <MyButton onClick={this.handleOpen} tip="Post Scream" placement="top">
+          {/* <IconButton onClick={this.handleOpen} className={classes.button}> */}
           <AddIcon color="primary" />
+          {/* </IconButton> */}
         </MyButton>
         <Dialog
           open={this.state.open}
@@ -95,21 +96,13 @@ class PostScream extends Component {
           fullWidth
           maxWidth="sm"
         >
-          <MyButton
-            tip="close"
-            onClick={this.handleClose}
-            tipClassName={classes.closeButton}
-          >
-            <CloseIcon />
-          </MyButton>
-
           <DialogTitle>Post New Scream</DialogTitle>
           <DialogContent>
-            <form onSubmit={this.handleSubmit}>
+            <form>
               <TextField
                 name="body"
                 type="text"
-                label="Scream Body"
+                label="Body"
                 multiline
                 rows="3"
                 placeholder="Scream body"
@@ -117,29 +110,30 @@ class PostScream extends Component {
                 value={this.state.body}
                 onChange={this.handleChange}
                 fullWidth
-                error={errors.body ? true : false}
-                helperText={errors.body}
               />
-
-              <Button
-                type="submit"
-                variant="contained"
-                color="primary"
-                className={classes.submitButton}
-                disabled={loading}
-              >
-                {loading && (
-                  <CircularProgress
-                    size={30}
-                    className={classes.progressSpinner}
-                  />
-                )}
-                Submit
-              </Button>
+              {/* <TextField
+                name="website"
+                type="text"
+                label="Website"
+                placeholder="Your website"
+                className={classes.textField}
+                value={this.state.website}
+                onChange={this.handleChange}
+                fullWidth
+              />
+              <TextField
+                name="location"
+                type="text"
+                label="Location"
+                placeholder="Your location"
+                className={classes.textField}
+                value={this.state.location}
+                onChange={this.handleChange}
+                fullWidth
+              /> */}
             </form>
           </DialogContent>
-        </Dialog>
-        {/* <DialogActions>
+          <DialogActions>
             <Button onClick={this.handleClose} color="primary">
               Cancel
             </Button>
@@ -152,7 +146,8 @@ class PostScream extends Component {
                 />
               )}
             </Button>
-          </DialogActions> */}
+          </DialogActions>
+        </Dialog>
       </Fragment>
     );
   }

@@ -23,9 +23,9 @@ export default function(state = initialState, action) {
         loading: true
       };
     case POST_SCREAM:
-      state.screams.push(action.payload);
       return {
-        ...state
+        ...state,
+        screams: [action.payload, ...state.screams]
       };
     case SET_SCREAMS:
       return {

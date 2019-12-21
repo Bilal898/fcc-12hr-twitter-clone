@@ -23,6 +23,7 @@ import {
 import { connect } from "react-redux";
 import Button from "@material-ui/core/Button";
 import DeleteScream from "./DeleteScream";
+import ScreamDialog from "./ScreamDialog";
 
 const styles = {
   card: {
@@ -122,6 +123,11 @@ class Scream extends Component {
             <ChatIcon color="primary" />
           </MyButton>
           <span>{commentCount} Comments</span>
+          {/* <MyButton tip="expand">
+            <SettingsOverscanIcon color="primary" />
+            <ScreamDialog />
+          </MyButton> */}
+          <ScreamDialog screamId={screamId} userHandle={userHandle} />
         </CardContent>
       </Card>
     );

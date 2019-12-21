@@ -40,7 +40,6 @@ const styles = theme => ({
 class PostScream extends Component {
   state = {
     body: "",
-    userHandle: "",
     open: false,
     errors: {}
   };
@@ -56,11 +55,10 @@ class PostScream extends Component {
   handleSubmit = event => {
     event.preventDefault();
     const newScreamData = {
-      body: this.state.body,
-      userHandle: this.props.user.credentials.handle
+      body: this.state.body
     };
     this.props.postScream(newScreamData);
-    this.handleClose();
+    // this.handleClose();
   };
   handleChange = event => {
     this.setState({
@@ -72,15 +70,12 @@ class PostScream extends Component {
     // this.mapUserDetailsToState(this.props.credentials);
   };
   handleClose = () => {
-    this.setState({ open: false, body: "" });
+    this.setState({ open: false, errors: {} });
   };
   render() {
     // const { classes } = this.props;
     const {
       classes,
-      user: {
-        credentials: { handle }
-      },
       UI: { loading }
     } = this.props;
     const { errors } = this.state;
@@ -139,20 +134,6 @@ class PostScream extends Component {
             </form>
           </DialogContent>
         </Dialog>
-        {/* <DialogActions>
-            <Button onClick={this.handleClose} color="primary">
-              Cancel
-            </Button>
-            <Button onClick={this.handleSubmit} color="primary">
-              Submit
-              {loading && (
-                <CircularProgress
-                  size={30}
-                  className={classes.progressSpinner}
-                />
-              )}
-            </Button>
-          </DialogActions> */}
       </Fragment>
     );
   }
@@ -165,9 +146,7 @@ PostScream.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  credentials: state.user.credentials,
-  UI: state.UI,
-  user: state.user
+  UI: state.UI
 });
 
 export default connect(mapStateToProps, { postScream })(

@@ -43,8 +43,8 @@ if (token) {
 export default class App extends Component {
   render() {
     return (
-      <Provider store={store}>
-        <MuiThemeProvider theme={theme}>
+      <MuiThemeProvider theme={theme}>
+        <Provider store={store}>
           <Router>
             <Navbar />
             <div className="container">
@@ -55,8 +55,8 @@ export default class App extends Component {
               </Switch>
             </div>
           </Router>
-        </MuiThemeProvider>
-      </Provider>
+        </Provider>
+      </MuiThemeProvider>
     );
   }
 }

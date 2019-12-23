@@ -48,6 +48,19 @@ export default function(state = initialState, action) {
       return {
         ...state
       };
+    case POST_SCREAM:
+      return {
+        ...state,
+        screams: [action.payload, ...state.screams]
+      };
+    case SUBMIT_COMMENT:
+      return {
+        ...state,
+        scream: {
+          ...state.scream,
+          comments: [action.payload, ...state.scream.comments]
+        }
+      };
     case DELETE_SCREAM:
       let index1 = state.screams.findIndex(
         scream => scream.screamId === action.payload

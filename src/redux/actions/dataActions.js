@@ -13,6 +13,7 @@ import {
   STOP_LOADING_UI
 } from "../types";
 import axios from "axios";
+import { readSync } from "fs";
 
 export const getScreams = () => dispatch => {
   dispatch({ type: LOADING_DATA });
@@ -115,6 +116,25 @@ export const deleteScream = screamId => dispatch => {
       dispatch({ type: DELETE_SCREAM, payload: screamId });
     })
     .catch(err => console.log(err));
+};
+
+export const getUserData = userHandle => dispatch => {
+  dispatch({ type: LOADING_DATA });
+  axios
+    .get(`/user/${userHandle}`)
+    .then(res => {
+      console.log("ok1111", res.data);
+      dispatch({
+        type: SET_SCREAMS,
+        payload: res.data.screams
+      });
+    })
+    .catch(() => {
+      dispatch({
+        type: SET_SCREAMS,
+        payload: null
+      });
+    });
 };
 
 export const clearErrors = () => dispatch => {

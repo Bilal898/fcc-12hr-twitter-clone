@@ -17,6 +17,7 @@ import AuthRoute from "./util/AuthRoute";
 import home from "./pages/home";
 import login from "./pages/login";
 import signup from "./pages/signup";
+import user from "./pages/user";
 //mui
 // import ThemeProvider from "@material-ui/styles/ThemeProvider";
 // import createMuiTheme from "@material-ui/core/styles/createMuiTheme";
@@ -52,6 +53,7 @@ export default class App extends Component {
                 <Route exact path="/" component={home} />
                 <AuthRoute exact path="/login" component={login} />
                 <AuthRoute exact path="/signup" component={signup} />
+                <Route exact path="/users/:handle" component={user} />
               </Switch>
             </div>
           </Router>

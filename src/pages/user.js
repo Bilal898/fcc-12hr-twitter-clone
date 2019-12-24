@@ -1,21 +1,42 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import Grid from "@material-ui/core/Grid";
+import axios from "axios";
 //
 import Scream from "../components/Scream";
-import Profile from "../components/Profile";
+import StaticProfile from "../components/StaticProfile";
 //redux
 import { getUserData } from "../redux/actions/dataActions";
 import { connect } from "react-redux";
 
 export class user extends Component {
+  state = {
+    profile: {}
+  };
   componentDidMount() {
-    this.props.getUserData(this.props.match.params.handle);
-    console.log("ok", this.props.data);
+    const handle = this.props.match.params.handle;
+    this.props.getUserData(handle);
+
+    axios
+      .get(`/user/${handle}`)
+      .then(res => {
+        console.log("res", res.data.user);
+        this.setState(
+          {
+            profile: res.data.user
+          },
+          () => {
+            console.log("res1", this.state.profile);
+          }
+        );
+      })
+      .catch(err => console.log(err));
+    // console.log("newdata", this.getState);
   }
 
   render() {
     const { screams, loading } = this.props.data;
+    // const { profile } = this.state;
     let recentScreamsMarkup = !loading ? (
       screams === null ? (
         <p>No screams yet</p>
@@ -31,7 +52,11 @@ export class user extends Component {
           {recentScreamsMarkup}
         </Grid>
         <Grid item sm={4} xs={8}>
-          <Profile />
+          {this.state.profile === null ? (
+            <p>loading profile</p>
+          ) : (
+            <StaticProfile profile={this.state.profile} />
+          )}
         </Grid>
       </Grid>
     );

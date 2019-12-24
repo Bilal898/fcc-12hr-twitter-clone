@@ -123,7 +123,7 @@ export const getUserData = userHandle => dispatch => {
   axios
     .get(`/user/${userHandle}`)
     .then(res => {
-      console.log("ok1111", res.data);
+      // console.log("ok1111", res.data);
       dispatch({
         type: SET_SCREAMS,
         payload: res.data.screams
